@@ -9,7 +9,6 @@ def get_youtube_url(query):
     for x in range(0, len(lines)):
         if x % 2 != 0:
             lines[x] = lines[x].replace('-',' ')
-            print(lines[x])
             if query in lines[x]:
                 return ("https://www.youtube.com/embed/" + lines[x-1])
 
