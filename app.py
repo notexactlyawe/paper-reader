@@ -23,6 +23,10 @@ def upload_file():
 def index():
     return render_template('index.html')
 
+@app.route('/learn')
+def learn():
+    return render_template('learn.html')
+
 @app.route('/css/<path:path>')
 def serve_css(path):
     return send_from_directory('static/css', path)
