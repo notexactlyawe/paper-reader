@@ -3,6 +3,15 @@ from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+app.config['UPLOAD_FOLDER'] = BASE_DIR + "/static/uploads"
+app.add_url_rule('/uploads/<filename>', 'uploaded_file', build_only=True)
+
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 @app.route('/api/v1/concepts', methods=['POST'])
@@ -31,13 +40,16 @@ def learn():
 def serve_css(path):
     return send_from_directory('static/css', path)
 
+
 @app.route('/img/<path:path>')
 def serve_img(path):
     return send_from_directory('static/img', path)
 
+
 @app.route('/js/<path:path>')
 def serve_js(path):
     return send_from_directory('static/js', path)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
