@@ -1,6 +1,23 @@
-from flask import Flask, send_from_directory, render_template
+import os, haven, utils
+from flask import Flask, send_from_directory, render_template, request, url_for
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+
+
+@app.route('/api/v1/concepts', methods=['POST'])
+def get_concepts():
+    return str(haven.analysis(request.form['url'], False))
+
+
+@app.route('/api/v1/upload', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    if file and utils.allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return url_for('uploaded_file', filename=filename)
+
 
 @app.route('/')
 def index():
