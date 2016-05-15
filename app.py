@@ -17,8 +17,9 @@ def uploaded_file(filename):
 
 @app.route('/api/v1/concepts', methods=['POST'])
 def get_concepts():
+    url = request.form['url']
     data = str(haven.analysis(request.form['url'], False))
-    return render_template('learn.html', data=data)
+    return render_template('learn.html', data=data, url=url)
 
 
 @app.route('/api/v1/extract', methods=['POST'])
