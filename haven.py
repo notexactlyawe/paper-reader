@@ -16,5 +16,5 @@ def get_text(url):
 
 
 
-# print analysis("http://www.gla.ac.uk/media/media_194538_en.pdf", False)
+#print (analysis("http://www.gla.ac.uk/media/media_194538_en.pdf", False))
 # print analysis("/Users/joshuarichardson/Downloads/media_194538_en.pdf", True)
