@@ -2,7 +2,6 @@ import os, haven, utils, sys, summarize, alchemy, json, wikimin
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 from wiki import Wiki
-from youtube import get_youtube_url
 
 # pip install this
 # import unirest
@@ -32,7 +31,7 @@ def get_concept(concept):
     w = Wiki()
     w_data = w.get_for_concept(concept)
     w.conn.close()
-    y_link = get_youtube_url(concept)
+    y_link = "https://www.youtube.com/embed/1wnE4vF9CQ4"
     ret = {"summary": w_data[0], "w_link": w_data[1], "v_link": y_link, "subs": w_data[2]}
     return json.dumps(ret)
 

@@ -15,9 +15,19 @@ function populateConcepts(){
 		   	  		 var response = (jQuery.parseJSON(data))['content'];
 
 		   			 $("#"+o.currentTarget.id).children().next().remove();
-		   		     $("#"+o.currentTarget.id).append('<div class="collapsible-body"><p>' + JSON.stringify(response) + '</p><img class="video-placeholder" src="static/img/video-placeholder.png"></div>');
+		   		     $("#"+o.currentTarget.id).append('<div class="collapsible-body"><p>' + JSON.stringify(response) + '</p><img class="video-placeholder" src="/static/img/video-placeholder.png"></div>');
 					 $("#"+o.currentTarget.id).children().next().show();
 		   	  });
+
+		   	  $.get( "/api/v1/concept/" + $(this).text(), function( data ) {
+				 	var response = (jQuery.parseJSON(data));
+					alert(JSON.stringify(response))
+
+//				    $( ".result" ).html( data );
+//					 $("#"+o.currentTarget.id).append('<div class="collapsible-body"><p>' + JSON.stringify(response) + '</p><img class="video-placeholder" src="/static/img/video-placeholder.png"></div>');
+
+
+			  });
 
 			}
 		);
