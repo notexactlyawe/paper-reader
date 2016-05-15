@@ -8,6 +8,7 @@ def analysis(location, is_file):
         client.post_request({"file": location}, HODApps.EXTRACT_CONCEPTS, async=False)
     return response["concepts"] if response is not None else "No results returned"
 
+
 def get_text(url):
     response = client.get_request({"url": url}, HODApps.EXTRACT_TEXT, async=False)
     return str(response["document"][0]["content"]) if response is not None else "No text returned"
