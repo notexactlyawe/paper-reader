@@ -20,6 +20,16 @@
   <main>
 
     <ul id="nav-mobile" class="side-nav fixed right">
+      
+      <form class="col s5" action="{{ url_for('summary') }}" method="POST">
+        <input type="hidden" name="url" value="{{ url }}">
+        <a id="file-submit" class="waves-effect waves-light btn float-right">
+          <!--<div class="modal-trigger" href="#upload-modal">-->
+            <input type="submit" value="Submit">
+          <!--</div>-->
+        </a>
+      </form>
+
       <ul class="collapsible" data-collapsible="accordion">
       </ul>   
     </ul>
