@@ -2,7 +2,10 @@ import os, haven, utils, sys, summarize, alchemy, json, wikimin
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 from wiki import Wiki
-import requests
+from youtube import get_youtube_url
+
+# pip install this
+import unirest
 
 
 reload(sys)
@@ -27,9 +30,11 @@ def get_concepts():
 @app.route('/api/v1/concept/<concept>')
 def get_concept(concept):
     w = Wiki()
-    ret = w.get_for_concept(concept)
+    w_data = w.get_for_concept(concept)
     w.conn.close()
-    return str(ret)
+    y_link = get_youtube_url(concept)
+    ret = {"summary": w_data[0], "w_link": w_data[1], "v_link": y_link, "subs": w_data[2]}
+    return json.dumps(ret)
 
 
 @app.route('/api/v1/extract', methods=['POST'])
@@ -60,7 +65,7 @@ def upload_file():
 
 @app.route('/api/v1/wikisummary', methods=['POST'])
 def wikipedia_summary():
-    return wikimin.get_summary(request.form['query'], request.form['sentences'])
+    return json.dumps({"content": wikimin.get_summary(request.form['query'], int(request.form['sentences']))})
 
 @app.route('/')
 def index():
@@ -74,12 +79,17 @@ def learn():
 
 @app.route('/summary', methods=['POST'])
 def summary():
-    data = "Hamster nais nais"
-    print request.form['url']
+    print "GET to /summary"
+    url = request.form['url']
+    print url
+    print request.url 
 
+    # Make a request to this API to get a summary of the PDF
+    r = requests.post(request.url+'/api/v1/summary', data={'url':url})
+    print r.status_code
+    print r.text
 
-
-    return render_template('summary.html', data=data)
+    return render_template('summary.html', data=r.text)
 
 
 @app.route('/css/<path:path>')

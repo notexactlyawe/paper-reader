@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 import pdb
+import cProfile
 import sqlite3
+import logging
 import wikipedia
 from wikipedia.exceptions import PageError, DisambiguationError
+
+logging.basicConfig(level=logging.DEBUG)
 
 class Wiki:
     def __init__(self):
@@ -10,9 +14,8 @@ class Wiki:
         self.curs = self.conn.cursor()
 
     def get_for_concept(self, concept):
-        try:
-            page = wikipedia.page(concept)
-        except PageError:
+        page = self.get_page(concept)
+        if page is None:
             return "Concept doesn't exist"
         link = "http://en.wikipedia.org/wiki/{}".format(concept)
         subs = self.get_subs(page)
@@ -25,6 +28,7 @@ class Wiki:
             page = self.get_page(link)
             if page:
                 links_sq.append(page.links)
+        logging.debug("links_sq built")
         # compute matrix of links
         links_mat = []
         for links in links_sq:
@@ -35,6 +39,7 @@ class Wiki:
                 else:
                     temp_row.append(len([elem for elem in links if elem in links2]))
             links_mat.append(temp_row)
+        logging.debug("links_mat built")
         # get largest summed list and index
         mat_sum = [sum(i) for i in links_mat]
         top_idx = mat_sum.index(max(mat_sum))
@@ -47,15 +52,22 @@ class Wiki:
         self.curs.execute(u"SELECT * FROM pages WHERE name = ?", (name, ))
         row = self.curs.fetchone()
         if row:
+            logging.debug(u"{} was in db".format(name))
+            if row[1] == "NONE":
+                return None
             return PageDuckClass(row[0], row[1].split(';'), row[2])
         try:
             page = wikipedia.page(name)
+            logging.debug(u"retrieved {}".format(name))
             self.curs.execute(u"INSERT INTO pages VALUES (?, ?, ?)", (name, ';'.join(page.links), page.summary))
             self.conn.commit()
+            return page
         except PageError:
-            return None
+            logging.warning(u"PageError on {}".format(name))
         except DisambiguationError:
-            return None
+            logging.warning(u"DisambiguationError on {}".format(name))
+        self.curs.execute(u"INSERT INTO pages VALUES (?, ?, ?)", (name, "NONE", "NONE"))
+        return None
 
 class PageDuckClass():
     def __init__(self, name, links, summary):
@@ -63,7 +75,10 @@ class PageDuckClass():
         self.summary = summary
         self.links = links
 
-if __name__ == "__main__":
+def main():
     w = Wiki()
-    print w.get_for_concept("Bananas")
+    print w.get_for_concept("Sound Localisation")
     w.conn.close()
+
+if __name__ == "__main__":
+    main()

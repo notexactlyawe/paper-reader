@@ -11,9 +11,18 @@ function populateConcepts(){
 		$(".collapsible").append('<li id="ch'+(j+1)+'"><div class="collapsible-header"><b>'+data[j]["concept"]+'</b></div></li>');
 		$("#ch"+(j+1)).click(
 			function(o){
-				console.log("I'm in #"+o.currentTarget.id);
-				$("#"+o.currentTarget.id).children().next().remove();
-				$("#"+o.currentTarget.id).append('<div class="collapsible-body"><p>This concept is about lorem ipsum dores ist amet.</p><img class="video-placeholder" src="static/img/video-placeholder.png"></div>');
+//				console.log("I'm in #"+o.currentTarget.id);
+
+
+		   	  var posting = $.post( "/api/v1/wikisummary", {"query": $(this).text(), "sentences": "1" } );
+		   	  posting.done(function( data ) {
+		   	  		 var response = (jQuery.parseJSON(data))['content'];
+
+		   			 $("#"+o.currentTarget.id).children().next().remove();
+		   		     $("#"+o.currentTarget.id).append('<div class="collapsible-body"><p>' + JSON.stringify(response) + '</p><img class="video-placeholder" src="static/img/video-placeholder.png"></div>');
+					 $("#"+o.currentTarget.id).children().next().show();
+		   	  });
+
 			}
 		);
 	}
