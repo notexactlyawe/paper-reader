@@ -1,7 +1,8 @@
-import os, haven, utils, sys, summarize, alchemy, json
+import os, haven, utils, sys, summarize, alchemy, json, wikimin
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 from wiki import Wiki
+import requests
 
 
 reload(sys)
@@ -57,13 +58,29 @@ def upload_file():
         return url_for('uploaded_file', filename=filename)
 
 
+@app.route('/api/v1/wikisummary', methods=['POST'])
+def wikipedia_summary():
+    return wikimin.get_summary(request.form['query'], request.form['sentences'])
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/learn')
 def learn():
     return render_template('learn.html')
+
+
+@app.route('/summary', methods=['POST'])
+def summary():
+    data = "Hamster nais nais"
+    print request.form['url']
+
+
+
+    return render_template('summary.html', data=data)
+
 
 @app.route('/css/<path:path>')
 def serve_css(path):

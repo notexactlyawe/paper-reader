@@ -2,7 +2,7 @@
 import pdb
 import sqlite3
 import wikipedia
-from wikipedia.exceptions import PageError
+from wikipedia.exceptions import PageError, DisambiguationError
 
 class Wiki:
     def __init__(self):
@@ -35,7 +35,6 @@ class Wiki:
                 else:
                     temp_row.append(len([elem for elem in links if elem in links2]))
             links_mat.append(temp_row)
-        pdb.set_trace()
         # get largest summed list and index
         mat_sum = [sum(i) for i in links_mat]
         top_idx = mat_sum.index(max(mat_sum))
@@ -55,6 +54,8 @@ class Wiki:
             self.conn.commit()
         except PageError:
             return None
+        except DisambiguationError:
+            return None
 
 class PageDuckClass():
     def __init__(self, name, links, summary):
@@ -64,5 +65,5 @@ class PageDuckClass():
 
 if __name__ == "__main__":
     w = Wiki()
-    print w.get_for_concept("Music Information Retrieval")
+    print w.get_for_concept("Bananas")
     w.conn.close()
