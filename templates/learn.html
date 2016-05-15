@@ -20,8 +20,8 @@
 
 <body>
   <meta id="my-data" data="{{data}}">
+  <!-- <meta id="my-summary" data="{{ summary }}"> -->
   <main>
-
     <ul id="nav-mobile" class="side-nav fixed right">
       
             <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Summary</a>
@@ -38,11 +38,11 @@
           <!-- Modal Structure -->
           <div id="modal1" class="modal">
             <div class="modal-content">
-              <h4>Modal Header</h4>
-              <p>A bunch of text</p>
+              <h4></h4>
+              <p>{{ summary }}</p>
             </div>
             <div class="modal-footer">
-              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Download</a>
             </div>
           </div>
         <!-- <div class="col s5 offset-s5" id="trains">
@@ -79,6 +79,5 @@
 </body>
 
 <script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
-<script src="{{ url_for('static', filename='js/concepts.js') }}"></script>
 <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
 </html>

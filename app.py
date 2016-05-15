@@ -23,7 +23,9 @@ def uploaded_file(filename):
 def get_concepts():
     url = request.form['url']
     data = json.dumps(haven.analysis(request.form['url'], False))
-    return render_template('learn.html', data=data, url=url)
+    summary = str(haven.get_text(request.form['url']))
+
+    return render_template('learn.html', data=data, url=url, summary=summarize.summarize(summary))
 
 
 @app.route('/api/v1/concept/<concept>')
@@ -73,22 +75,9 @@ def index():
 
 @app.route('/learn')
 def learn():
-    return render_template('learn.html')
-
-
-@app.route('/summary', methods=['POST'])
-def summary():
-    print "GET to /summary"
-    url = request.form['url']
-    print url
-    print request.url 
-
-    # Make a request to this API to get a summary of the PDF
-    r = requests.post(request.url+'/api/v1/summary', data={'url':url})
-    print r.status_code
-    print r.text
-
-    return render_template('summary.html', data=r.text)
+    
+    a = 0
+    return render_template('learn.html', summary=summary, a="hamster")
 
 
 @app.route('/css/<path:path>')

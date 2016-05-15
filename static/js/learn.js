@@ -37,29 +37,31 @@ function populateConcepts(){
 
 
 
-function populateSummary(){
-	var posting = $.post( "/api/v1/wikisummary", {"url": } );
+// function populateSummary(){
+// 	//var posting = $.post( "/api/v1/summarize" );
 
-	console.log(input);
-	for (var i = 0; i<input.length; i++){
-			$("#modal1").append("<div class='row'><h4>"+input[i]+".</h4></div>");
-		}
-	}
+	
+// 	var input = jQuery.parseJSON($('#my-summary').attr("data"));
+// 	console.log(input);
+// 	for (var i = 0; i<input.length; i++){
+// 		$("#modal1").append("<div class='row'><h4>"+input[i]+".</h4></div>");
+// 	}
 
-	$(document).ready(function(){
-		var input = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget leo tellus. Morbi augue nisl, pulvinar eget laoreet eget, gravida non sapien. Cras lectus neque, consequat at mauris sed, scelerisque condimentum urna. Pellentesque tristique ac est eget facilisis. Suspendisse eget ligula euismod, pulvinar diam vel, pellentesque felis. Vestibulum eget suscipit nisl. Mauris tempus magna erat, sit amet pulvinar eros ornare a. Pellentesque id erat sodales, luctus risus eget, feugiat arcu. Nulla eleifend, turpis accumsan maximus imperdiet, nunc est ultricies dui, a porta ante libero nec magna. Proin sit amet turpis vitae massa pretium hendrerit ut vel nibh. Nunc nec tortor."
-		displaySummary(input.split(". "));
-	});
-}
+// 	$(document).ready(function(){
+// 		var input = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget leo tellus. Morbi augue nisl, pulvinar eget laoreet eget, gravida non sapien. Cras lectus neque, consequat at mauris sed, scelerisque condimentum urna. Pellentesque tristique ac est eget facilisis. Suspendisse eget ligula euismod, pulvinar diam vel, pellentesque felis. Vestibulum eget suscipit nisl. Mauris tempus magna erat, sit amet pulvinar eros ornare a. Pellentesque id erat sodales, luctus risus eget, feugiat arcu. Nulla eleifend, turpis accumsan maximus imperdiet, nunc est ultricies dui, a porta ante libero nec magna. Proin sit amet turpis vitae massa pretium hendrerit ut vel nibh. Nunc nec tortor."
+// 		displaySummary(input.split(". "));
+// 	});
+// }
 
 
 $(document).ready(function(){
-	searchForAConcept("Protocol-driven");
+	//searchForAConcept("Protocol-driven");
 	populateConcepts();
 	$('.modal-trigger').leanModal();
 
-	// $(".modal-trigger").click(function(){
-	// 	$('#modal1').openModal();
-	// });
+	$(".modal-trigger").click(function(){
+		$('#modal1').openModal();
+	});
+	//populateSummary();
 
 });
