@@ -66,6 +66,8 @@ function populateConcepts(){
 $(document).ready(function(){
 	//searchForAConcept("Protocol-driven");
 	populateConcepts();
+	console.log($("great-id").text());
+
 	$('.modal-trigger').leanModal();
 
 	$(".modal-trigger").click(function(){

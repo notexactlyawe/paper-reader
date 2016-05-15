@@ -75,35 +75,8 @@ def index():
 
 @app.route('/learn')
 def learn():
-<<<<<<< HEAD
-    return render_template('learn.html')
-
-'''
-@app.route('/summary', methods=['POST'])
-def summary():
-    print "GET to /summary"
-    print app.config['SERVER_NAME']
-    url = request.form['url']
-
-    # Make a request to this API to get a summary of the PDF
-    response = unirest.post("http://localhost:5000"+"/api/v1/summarize",
-        params={ "url": request.form['url'] }
-    )
-
-    print response.code
-    print response.headers
-    print response.body
-    print response.raw_body
-
-    # Send data to Summary template
-    return render_template('summary.html', data=response.body)
-'''
-=======
-    
-    a = 0
     return render_template('learn.html', summary=summary, a="hamster")
 
->>>>>>> ff6f23401eb4a94dfcc42b8a652de4a3186f96de
 
 @app.route('/css/<path:path>')
 def serve_css(path):
