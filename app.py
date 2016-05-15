@@ -1,4 +1,4 @@
-import os, haven, utils, sys, summarize, alchemy
+import os, haven, utils, sys, summarize, alchemy, json
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 
@@ -18,7 +18,7 @@ def uploaded_file(filename):
 @app.route('/api/v1/concepts', methods=['POST'])
 def get_concepts():
     url = request.form['url']
-    data = str(haven.analysis(request.form['url'], False))
+    data = json.dumps(haven.analysis(request.form['url'], False))
     return render_template('learn.html', data=data, url=url)
 
 

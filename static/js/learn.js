@@ -14,6 +14,13 @@ function populateConcepts(){
 		);
 	}
 
+	var data = jQuery.parseJSON($('#my-data').attr("data"));
+
+	for (var j=0; j<data.length;j++) {
+
+		$(".collapsible").append('<li id="ch'+(i+1)+'"><div class="collapsible-header">'+data[j]["concept"]+'</div></li>');
+	}
+
 }
 
 function searchForAConcept(td_text){
