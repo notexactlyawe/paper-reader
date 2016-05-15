@@ -8,14 +8,16 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <!-- RequireJS for PDF.js -->
+  <script src="../node_modules/requirejs/require.js"></script>
 </head>
 
 <body>
   <meta id="my-data" data="{{data}}">
   <main>
-
 
     <ul id="nav-mobile" class="side-nav fixed right">
       <ul class="collapsible" data-collapsible="accordion">
@@ -28,7 +30,7 @@
           <div class="btn trains"></div>
 
         </div> -->
-          <iframe src="{{ url }}" height="1000px" width="100%"></iframe>
+          <iframe src="static/web/viewer.html?file={{ url }}#search=Protocol" height="500px" width="800px"></iframe>
           <!-- <object data="static/uploads/paper.pdf" type="application/pdf" height="500px" width="800px">
           <embed src="static/uploads/paper.pdf" type="application/pdf" height="500px"/>
           </object> -->
@@ -38,11 +40,28 @@
 
 
   </main>
+  <footer class="page-footer teal">
+  <div class="container">
+    <div class="row">
+      <div class="col s9 offset-s2">
+        <h5 class="white-text">Prereviewer</h5>
+        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      <div class="row">
+      <div class="col s9 offset-s2">
+        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Group Two</a>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
 <script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
 <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
-
 </html>
