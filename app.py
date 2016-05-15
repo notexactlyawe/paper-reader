@@ -1,6 +1,7 @@
 import os, haven, utils, sys, summarize, alchemy, json
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
+from wiki import Wiki
 
 
 reload(sys)
@@ -20,6 +21,14 @@ def get_concepts():
     url = request.form['url']
     data = json.dumps(haven.analysis(request.form['url'], False))
     return render_template('learn.html', data=data, url=url)
+
+
+@app.route('/api/v1/concept/<concept>')
+def get_concept(concept):
+    w = Wiki()
+    ret = w.get_for_concept(concept)
+    w.conn.close()
+    return str(ret)
 
 
 @app.route('/api/v1/extract', methods=['POST'])
