@@ -43,5 +43,10 @@ function searchForAConcept(td_text){
 $(document).ready(function(){
 	searchForAConcept("Protocol-driven");
 	populateConcepts();
+	$('.modal-trigger').leanModal();
+
+	// $(".modal-trigger").click(function(){
+	// 	$('#modal1').openModal();
+	// });
 	
 });

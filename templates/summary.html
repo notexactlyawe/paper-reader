@@ -5,22 +5,22 @@
 
 
 {% block content %}
+  <div class="container">
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text lighten-2">Prereviewer</h1>
+        <div class="row center">
+          {% if data is defined %}
+            <h4>{{ data }}</h4>
+          {% else %}
+            <h5 class="header col s12 light">There is no PDF to display.</h5>
+          {% endif %}  
+        </div>
 
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br><br>
-      <h1 class="header center teal-text lighten-2">Prereviewer</h1>
-      <div class="row center">
-        {% if data is defined %}
-          <h4>{{ data }}</h4>
-        {% else %}
-          <h5 class="header col s12 light">There is no PDF to display.</h5>
-        {% endif %}  
       </div>
-
     </div>
   </div>
-
 
   <div class="container">
     <div class="row">
@@ -30,5 +30,6 @@
 
   </div>
 
-
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{{ url_for('static', filename='js/summary.js') }}"></script>
 {% endblock %}
