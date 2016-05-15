@@ -9,6 +9,12 @@ def analysis(location, is_file):
     return response["concepts"] if response is not None else "No results returned"
 
 
+def get_text(url):
+    response = client.get_request({"url": url}, HODApps.EXTRACT_TEXT, async=False)
+    return str(response["document"][0]["content"]) if response is not None else "No text returned"
+
+
+
 
 # print analysis("http://www.gla.ac.uk/media/media_194538_en.pdf", False)
 # print analysis("/Users/joshuarichardson/Downloads/media_194538_en.pdf", True)

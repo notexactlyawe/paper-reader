@@ -1,12 +1,13 @@
-import os, haven, utils
+import os, haven, utils, sys, summarize
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app.config['UPLOAD_FOLDER'] = BASE_DIR + "/static/uploads"
-app.add_url_rule('/uploads/<filename>', 'uploaded_file', build_only=True)
-
 
 
 @app.route('/uploads/<filename>')
@@ -17,6 +18,17 @@ def uploaded_file(filename):
 @app.route('/api/v1/concepts', methods=['POST'])
 def get_concepts():
     return str(haven.analysis(request.form['url'], False))
+
+
+@app.route('/api/v1/extract', methods=['POST'])
+def extract_text():
+    return str(haven.get_text(request.form['url']))
+
+
+@app.route('/api/v1/summarize', methods=['POST'])
+def summarize_text():
+    toSummarize = str(haven.get_text(request.form['url']))
+    return summarize.summarize(toSummarize)
 
 
 @app.route('/api/v1/upload', methods=['POST'])
