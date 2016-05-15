@@ -59,7 +59,7 @@ def upload_file():
 
 @app.route('/api/v1/wikisummary', methods=['POST'])
 def wikipedia_summary():
-    return wikimin.get_summary(request.form['query'], request.form['sentences'])
+    return json.dumps({"content": wikimin.get_summary(request.form['query'], int(request.form['sentences']))})
 
 @app.route('/')
 def index():
