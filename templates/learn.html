@@ -23,16 +23,13 @@
       
       <form class="col s5" action="{{ url_for('summary') }}" method="POST">
         <input type="hidden" name="url" value="{{ url }}">
-        <a id="file-submit" class="waves-effect waves-light btn float-right">
-          <!--<div class="modal-trigger" href="#upload-modal">-->
-            <input type="submit" value="Submit">
-          <!--</div>-->
-        </a>
+        <input type="submit" value="Submit">
       </form>
 
       <ul class="collapsible" data-collapsible="accordion">
       </ul>   
     </ul>
+    
     <div class="container">
       <div class="row">
         <div class="col s9 offset-s3"> 

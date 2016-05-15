@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from wiki import Wiki
 
 # pip install this
-import unirest
+# import unirest
 
 
 reload(sys)
@@ -73,21 +73,26 @@ def index():
 def learn():
     return render_template('learn.html')
 
-
+'''
 @app.route('/summary', methods=['POST'])
 def summary():
     print "GET to /summary"
+    print app.config['SERVER_NAME']
     url = request.form['url']
-    print url
-    print request.url 
 
     # Make a request to this API to get a summary of the PDF
-    r = requests.post(request.url+'/api/v1/summary', data={'url':url})
-    print r.status_code
-    print r.text
+    response = unirest.post("http://localhost:5000"+"/api/v1/summarize",
+        params={ "url": request.form['url'] }
+    )
 
-    return render_template('summary.html', data=r.text)
+    print response.code
+    print response.headers
+    print response.body
+    print response.raw_body
 
+    # Send data to Summary template
+    return render_template('summary.html', data=response.body)
+'''
 
 @app.route('/css/<path:path>')
 def serve_css(path):
