@@ -14,9 +14,13 @@ function populateConcepts(){
 
 }
 
-function populateMainScreen(){
-	$("main").append("<input type='button' id='trains'>");
-}
+// function populateMainScreen(){
+// 	$('.trains').click(function(){
+// 		$.ajax({
+// 			url:
+// 		})
+// 	})
+// }
 
 
 $(document).ready(function(){
