@@ -30,7 +30,7 @@
         <div class="file-field input-field">
           <div class="btn">
              <span>Browse</span>
-             <input type="file">
+             <input type="file" name="file">
           </div>
           <div class="file-path-wrapper">
              <input class="file-path validate" type="text" placeholder="Upload file">
@@ -58,7 +58,7 @@
              <span>Paste</span>
           </div>
           <div class="file-path-wrapper">
-            <input type="text" class="validate">
+            <input type="text" name="url" class="validate url-validator">
           </div>
         </div>
 
@@ -72,5 +72,6 @@
     <br/><br/><br/><br/><br/><br/><br/><br/>
 
   </div>
+
 
 {% endblock %}

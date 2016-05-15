@@ -14,15 +14,10 @@ function populateConcepts(){
 
 }
 
-// function populateMainScreen(){
-// 	$('.trains').click(function(){
-// 		$.ajax({
-// 			url:
-// 		})
-// 	})
-// }
+
 
 
 $(document).ready(function(){
-	populateConcepts();
+	searchForAConcept(concept)
+	
 });
