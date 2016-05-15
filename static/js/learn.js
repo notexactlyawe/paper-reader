@@ -1,4 +1,6 @@
 function populateConcepts(){
+
+	console.log("in populateConcepts");
 	concepts = ["Concept#1","Concept#2","Concept#3"];
 	
 	for (var i=0; i<concepts.length; i++){
@@ -14,10 +16,13 @@ function populateConcepts(){
 
 }
 
+function searchForAConcept(td_text){
 
+}
 
 
 $(document).ready(function(){
-	searchForAConcept(concept)
+	searchForAConcept("Protocol-driven");
+	populateConcepts();
 	
 });
