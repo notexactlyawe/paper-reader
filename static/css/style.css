@@ -42,3 +42,7 @@ main {
 .float-right {
 	float: right;
 }
+
+div.collapsible-body > p {
+	line-height:100% !important;
+}
