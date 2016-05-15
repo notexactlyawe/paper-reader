@@ -1,4 +1,4 @@
-import os, haven, utils, sys, summarize
+import os, haven, utils, sys, summarize, alchemy
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 
@@ -28,8 +28,14 @@ def extract_text():
 
 @app.route('/api/v1/summarize', methods=['POST'])
 def summarize_text():
-    toSummarize = str(haven.get_text(request.form['url']))
-    return summarize.summarize(toSummarize)
+    to_summarize = str(haven.get_text(request.form['url']))
+    return summarize.summarize(to_summarize)
+
+
+@app.route('/api/v1/nouns', methods=['POST'])
+def nouns():
+    to_noun = str(haven.get_text(request.form['url']))
+    return alchemy.extract_nouns(to_noun)
 
 
 @app.route('/api/v1/upload', methods=['POST'])
