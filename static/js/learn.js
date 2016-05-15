@@ -1,8 +1,5 @@
 function populateConcepts(){
-
 	console.log("in populateConcepts");
-
-
 
 	var data = jQuery.parseJSON($('#my-data').attr("data"));
 
@@ -11,10 +8,9 @@ function populateConcepts(){
 		$(".collapsible").append('<li id="ch'+(j+1)+'"><div class="collapsible-header"><b>'+data[j]["concept"]+'</b></div></li>');
 		$("#ch"+(j+1)).click(
 			function(o){
-//				console.log("I'm in #"+o.currentTarget.id);
 
 
-		   	  var posting = $.post( "/api/v1/wikisummary", {"query": $(this).text(), "sentences": "1" } );
+		   	  var posting = $.post( "/api/v1/wikisummary", {"query": $(this).text(), "sentences": "2" } );
 		   	  posting.done(function( data ) {
 		   	  		 var response = (jQuery.parseJSON(data))['content'];
 
@@ -37,5 +33,10 @@ function searchForAConcept(td_text){
 $(document).ready(function(){
 	searchForAConcept("Protocol-driven");
 	populateConcepts();
+	$('.modal-trigger').leanModal();
+
+	// $(".modal-trigger").click(function(){
+	// 	$('#modal1').openModal();
+	// });
 	
 });
