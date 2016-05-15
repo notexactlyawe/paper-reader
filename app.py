@@ -2,7 +2,9 @@ import os, haven, utils, sys, summarize, alchemy, json, wikimin
 from flask import Flask, send_from_directory, render_template, request, url_for
 from werkzeug.utils import secure_filename
 from wiki import Wiki
-import requests
+
+# pip install this
+import unirest
 
 
 reload(sys)
@@ -74,12 +76,17 @@ def learn():
 
 @app.route('/summary', methods=['POST'])
 def summary():
-    data = "Hamster nais nais"
-    print request.form['url']
+    print "GET to /summary"
+    url = request.form['url']
+    print url
+    print request.url 
 
+    # Make a request to this API to get a summary of the PDF
+    r = requests.post(request.url+'/api/v1/summary', data={'url':url})
+    print r.status_code
+    print r.text
 
-
-    return render_template('summary.html', data=data)
+    return render_template('summary.html', data=r.text)
 
 
 @app.route('/css/<path:path>')
