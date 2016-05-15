@@ -10,7 +10,7 @@ function populateConcepts(){
 			function(o){
 
 
-		   	  var posting = $.post( "/api/v1/wikisummary", {"query": $(this).text(), "sentences": "1" } );
+		   	  var posting = $.post( "/api/v1/wikisummary", {"query": $(this).text(), "sentences": "2" } );
 		   	  posting.done(function( data ) {
 		   	  		 var response = (jQuery.parseJSON(data))['content'];
 
