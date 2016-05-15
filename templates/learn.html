@@ -8,11 +8,11 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
   <!-- RequireJS for PDF.js -->
-  <script src="../node_modules/requirejs/require.js"></script>
+  <script src="{{ url_for('static', filename='requirejs/require.js') }}"></script>
 </head>
 
 <body>
@@ -30,10 +30,9 @@
           <div class="btn trains"></div>
 
         </div> -->
-          <iframe src="static/web/viewer.html?file={{ url }}#search=Protocol" height="500px" width="800px"></iframe>
-          <!-- <object data="static/uploads/paper.pdf" type="application/pdf" height="500px" width="800px">
-          <embed src="static/uploads/paper.pdf" type="application/pdf" height="500px"/>
-          </object> -->
+          <!--<iframe src="static/web/viewer.html?file={{ url }}#search=Protocol" height="500px" width="800px"></iframe>-->
+          <iframe src="{{ url }}" width="100%" height="1000px"></iframe>
+          
         </div>
       </div>
     </div>
@@ -63,5 +62,6 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
 <script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
+<script src="{{ url_for('static', filename='js/concepts.js') }}"></script>
 <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
 </html>
