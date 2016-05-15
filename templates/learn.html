@@ -20,8 +20,8 @@
 
 <body>
   <meta id="my-data" data="{{data}}">
+  <!-- <meta id="my-summary" data="{{ summary }}"> -->
   <main>
-
     <ul id="nav-mobile" class="side-nav fixed right">
       
       <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Summary</a>
@@ -37,11 +37,11 @@
           <!-- Modal Structure -->
           <div id="modal1" class="modal">
             <div class="modal-content">
-              <h4>Modal Header</h4>
-              <p>A bunch of text</p>
+              <h4></h4>
+              <p>{{ summary }}</p>
             </div>
             <div class="modal-footer">
-              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Download</a>
             </div>
           </div>
         <!-- <div class="col s5 offset-s5" id="trains">
@@ -60,7 +60,7 @@
   <div class="container">
     <div class="row">
       <div class="col s9 offset-s2">
-        <h5 class="white-text">Prereviewer</h5>
+        <h5 class="white-text">PaperTurtle</h5>
         <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
       </div>
@@ -78,6 +78,5 @@
 </body>
 
 <script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
-<script src="{{ url_for('static', filename='js/concepts.js') }}"></script>
 <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
 </html>

@@ -23,7 +23,9 @@ def uploaded_file(filename):
 def get_concepts():
     url = request.form['url']
     data = json.dumps(haven.analysis(request.form['url'], False))
-    return render_template('learn.html', data=data, url=url)
+    summary = str(haven.get_text(request.form['url']))
+
+    return render_template('learn.html', data=data, url=url, summary=summarize.summarize(summary))
 
 
 @app.route('/api/v1/concept/<concept>')
@@ -73,6 +75,7 @@ def index():
 
 @app.route('/learn')
 def learn():
+<<<<<<< HEAD
     return render_template('learn.html')
 
 '''
@@ -95,6 +98,12 @@ def summary():
     # Send data to Summary template
     return render_template('summary.html', data=response.body)
 '''
+=======
+    
+    a = 0
+    return render_template('learn.html', summary=summary, a="hamster")
+
+>>>>>>> ff6f23401eb4a94dfcc42b8a652de4a3186f96de
 
 @app.route('/css/<path:path>')
 def serve_css(path):
