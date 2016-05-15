@@ -6,7 +6,7 @@ from sumy.parsers.plaintext import PlaintextParser
 
 
 LANGUAGE = "english"
-SENTENCES_COUNT = 4
+SENTENCES_COUNT = 8
 
 
 def summarize(text):
