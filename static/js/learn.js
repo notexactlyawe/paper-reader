@@ -1,8 +1,5 @@
 function populateConcepts(){
-
 	console.log("in populateConcepts");
-
-
 
 	var data = jQuery.parseJSON($('#my-data').attr("data"));
 
@@ -11,7 +8,6 @@ function populateConcepts(){
 		$(".collapsible").append('<li id="ch'+(j+1)+'"><div class="collapsible-header"><b>'+data[j]["concept"]+'</b></div></li>');
 		$("#ch"+(j+1)).click(
 			function(o){
-//				console.log("I'm in #"+o.currentTarget.id);
 
 
 		   	  var posting = $.post( "/api/v1/wikisummary", {"query": $(this).text(), "sentences": "1" } );
