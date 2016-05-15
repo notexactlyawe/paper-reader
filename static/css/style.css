@@ -37,6 +37,7 @@ body {
 
 main {
 	flex: 1 0 auto;
+}
 
 .float-right {
 	float: right;

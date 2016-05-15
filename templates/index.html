@@ -6,14 +6,16 @@
 
 {% block content %}
 
-
-
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
       <h1 class="header center teal-text lighten-2">Prereviewer</h1>
       <div class="row center">
-        <h5 class="header col s12 light">Draw insight from PDF documents</h5>
+        {% if msg is defined %}
+          <h4>{{ msg }}</h4>
+        {% else %}
+          <h5 class="header col s12 light">Draw insight from PDF documents</h5>
+        {% endif %}  
       </div>
 
     </div>
@@ -21,9 +23,9 @@
 
 
   <div class="container">
-
     <div class="row">
-      <form class="col s5">
+
+      <form class="col s5" action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
         <label>Select a file for upload</label>
         <div class="file-field input-field">
           <div class="btn">
@@ -34,6 +36,13 @@
              <input class="file-path validate" type="text" placeholder="Upload file">
           </div>
         </div>
+
+        <a id="file-submit" class="waves-effect waves-light btn float-right">
+          <!--<div class="modal-trigger" href="#upload-modal">-->
+            <input type="submit" value="Submit">
+          <!--</div>-->
+        </a>
+
       </form>
 
       <div class="col s2">
@@ -42,7 +51,7 @@
         </div>
       </div>
 
-      <form class="col s5">
+      <form class="col s5" action="{{ url_for('get_concepts') }}" method="POST" enctype="multipart/form-data">
         <label>Paste a URL of a PDF</label>
         <div class="file-field input-field">
           <div class="btn">
@@ -52,6 +61,11 @@
             <input type="text" class="validate">
           </div>
         </div>
+
+        <a id="url-submit" class="waves-effect waves-light btn float-right">
+            <input type="submit" value="Submit">
+        </a>
+        
       </form>
     </div>
 
