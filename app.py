@@ -33,7 +33,7 @@ def get_concept(concept):
     w_data = w.get_for_concept(concept)
     w.conn.close()
     y_link = get_youtube_url(concept)
-    ret = {"summary": w_data[0], "w_link": w_data[1], "v_link": y_link, "subs": w_data[1]}
+    ret = {"summary": w_data[0], "w_link": w_data[1], "v_link": y_link, "subs": w_data[2]}
     return json.dumps(ret)
 
 
